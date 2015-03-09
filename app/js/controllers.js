@@ -4,16 +4,22 @@
 
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $http.get('phones/phones.json').success(function(data) {
-      $scope.phones = data;
-    });
+phonecatControllers.controller('PhoneListCtrl', [ '$http',
+    function ($http) {
+        var vm = this;
+        $http.get('phones/phones.json').success(function (data) {
+            vm.phones = data;
+        });
 
-    $scope.orderProp = 'age';
-  }]);
+        vm.orderProp = 'age';
+    }]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
-    $scope.phoneId = $routeParams.phoneId;
-  }]);
+phonecatControllers.controller('PhoneDetailCtrl', ['$routeParams', '$http',
+    function ($routeParams, $http) {
+        var vm = this;
+
+        $http.get('phones/' + $routeParams.phoneId + '.json').success(function (data) {
+            vm.phone = data;
+        });
+        vm.phoneId = $routeParams.phoneId;
+    }]);

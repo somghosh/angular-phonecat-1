@@ -5,7 +5,7 @@
 
       Search: <input ng-model="query">
       Sort by:
-      <select ng-model="orderProp">
+      <select ng-model="phoneListCtrl.orderProp">
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
@@ -15,7 +15,7 @@
       <!--Body content-->
 
       <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+        <li ng-repeat="phone in phoneListCtrl.phones | filter:query | orderBy:phoneListCtrl.orderProp" class="thumbnail">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
